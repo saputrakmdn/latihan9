@@ -15,9 +15,7 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragmen_for_list_people, container, false)
-        addFab.setOnClickListener{
-            Toast.makeText(activity.applicationContext, "test Click fab", Toast.LENGTH_SHORT).show()
-        }
+
     }
     override fun onItemClick(people: People, itemView: View) {
         Toast.makeText(activity.applicationContext, "test Click contact list", Toast.LENGTH_SHORT).show()
@@ -26,6 +24,12 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
         peopleRecyclerView.adapter = ListPeopleAdapter(peoplelist, this)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        addFab.setOnClickListener{
+            Toast.makeText(activity.applicationContext, "test Click fab", Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onResume() {
         super.onResume()
         val people = (activity?.application as StartApp).getPeopleRepo().getAllPeople()
