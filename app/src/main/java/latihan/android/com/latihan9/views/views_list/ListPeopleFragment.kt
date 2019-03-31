@@ -12,6 +12,7 @@ import latihan.android.com.latihan9.R
 import latihan.android.com.latihan9.StartApp
 import latihan.android.com.latihan9.data.data_model.People
 import latihan.android.com.latihan9.views.views_add.AddPeopleData
+import latihan.android.com.latihan9.views.views_details.DetailAct
 
 class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
 
@@ -21,6 +22,9 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
     }
     override fun onItemClick(people: People, itemView: View) {
         Toast.makeText(activity.applicationContext, "test Click contact list", Toast.LENGTH_SHORT).show()
+        val intent = Intent(activity.applicationContext, DetailAct::class.java)
+        intent.putExtra(getString(R.string.people_id), people.id)
+        startActivity(intent)
     }
     private fun populatePeopleList(peoplelist : List<People>){
         peopleRecyclerView.adapter = ListPeopleAdapter(peoplelist, this)
