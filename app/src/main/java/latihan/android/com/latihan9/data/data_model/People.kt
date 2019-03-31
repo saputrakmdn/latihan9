@@ -1,5 +1,9 @@
 package latihan.android.com.latihan9.data.data_model
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
+
+@Entity
 class People (
     var name : String = "",
     var metAt : String ="",
@@ -7,5 +11,5 @@ class People (
     var email : String = "",
     var facebook : String = "",
     var twitter : String ="",
-    var id : Int = 0
+    @PrimaryKey(autoGenerate = true) var id : Int = 0
 )

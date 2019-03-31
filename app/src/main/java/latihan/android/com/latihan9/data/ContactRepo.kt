@@ -3,24 +3,35 @@ package latihan.android.com.latihan9.data
 import android.app.Application
 import latihan.android.com.latihan9.data.data_model.People
 import latihan.android.com.latihan9.data.data_net.PeopleListInfo
+import latihan.android.com.latihan9.data.db_only.PeopleDAO
+import latihan.android.com.latihan9.data.db_only.PeopleDb
 
 class ContactRepo(application:Application) {
+
+    private val peopleDao : PeopleDAO
+    init {
+        val peopleDatabase = PeopleDb.getInstance(application)
+        peopleDao = peopleDatabase.peopleDao()
+    }
     /**
      * menampilkan data tapi secara descending
      */
     fun getAllPeople(): List<People>{
-        val allpeople = PeopleListInfo.peopleList
-        return allpeople.reversed()
+//        val allpeople = PeopleListInfo.peopleList
+//        return allpeople.reversed()
+        return peopleDao.getAll()
     }
     fun insertPeople(people : People){
-        PeopleListInfo.peopleList.add(people)
+//        PeopleListInfo.peopleList.add(people)
+        peopleDao.insert(people)
     }
     fun findPeople(id : Int):People?{
-        for (people in PeopleListInfo.peopleList){
-            if(people.id== id){
-                return people
-            }
-        }
-        return null
+//        for (people in PeopleListInfo.peopleList){
+//            if(people.id== id){
+//                return people
+//            }
+//        }
+//        return null
+        return peopleDao.find(id)
     }
 }
