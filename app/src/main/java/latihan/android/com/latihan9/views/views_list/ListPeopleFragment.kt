@@ -1,6 +1,7 @@
 package latihan.android.com.latihan9.views.views_list
 
 import android.app.Fragment
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.fragmen_for_list_people.*
 import latihan.android.com.latihan9.R
 import latihan.android.com.latihan9.StartApp
 import latihan.android.com.latihan9.data.data_model.People
+import latihan.android.com.latihan9.views.views_add.AddPeopleData
 
 class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
 
@@ -28,6 +30,8 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
         super.onViewCreated(view, savedInstanceState)
         addFab.setOnClickListener{
             Toast.makeText(activity.applicationContext, "test Click fab", Toast.LENGTH_SHORT).show()
+            val intent = Intent(activity.applicationContext, AddPeopleData::class.java)
+            startActivity(intent)
         }
     }
     override fun onResume() {
