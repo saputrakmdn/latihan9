@@ -1,6 +1,7 @@
 package latihan.android.com.latihan9.data
 
 import android.app.Application
+import android.arch.lifecycle.LiveData
 import latihan.android.com.latihan9.data.data_model.People
 import latihan.android.com.latihan9.data.data_net.PeopleListInfo
 import latihan.android.com.latihan9.data.db_only.PeopleDAO
@@ -16,7 +17,7 @@ class ContactRepo(application:Application) {
     /**
      * menampilkan data tapi secara descending
      */
-    fun getAllPeople(): List<People>{
+    fun getAllPeople(): LiveData<List<People>>{
 //        val allpeople = PeopleListInfo.peopleList
 //        return allpeople.reversed()
         return peopleDao.getAll()

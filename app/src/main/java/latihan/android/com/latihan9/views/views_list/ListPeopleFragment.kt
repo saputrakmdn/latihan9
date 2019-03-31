@@ -1,8 +1,10 @@
 package latihan.android.com.latihan9.views.views_list
 
-import android.app.Fragment
+
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +23,8 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
 
     }
     override fun onItemClick(people: People, itemView: View) {
-        Toast.makeText(activity.applicationContext, "test Click contact list", Toast.LENGTH_SHORT).show()
-        val intent = Intent(activity.applicationContext, DetailAct::class.java)
+        Toast.makeText(context, "test Click contact list", Toast.LENGTH_SHORT).show()
+        val intent = Intent(context, DetailAct::class.java)
         intent.putExtra(getString(R.string.people_id), people.id)
         startActivity(intent)
     }
@@ -30,17 +32,22 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
         peopleRecyclerView.adapter = ListPeopleAdapter(peoplelist, this)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addFab.setOnClickListener{
-            Toast.makeText(activity.applicationContext, "test Click fab", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity.applicationContext, AddPeopleData::class.java)
+            Toast.makeText(context, "test Click fab", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, AddPeopleData::class.java)
             startActivity(intent)
         }
     }
     override fun onResume() {
         super.onResume()
-        val people = (activity?.application as StartApp).getPeopleRepo().getAllPeople()
-        populatePeopleList(people)
+//        val people = (activity?.application as StartApp).getPeopleRepo().getAllPeople()
+//        populatePeopleList(people)
+
+        val peopleRepo = (activity?.application as StartApp).getPeopleRepo()
+        peopleRepo.getAllPeople().observe(this, Observer {
+            peopleList -> populatePeopleList(peopleList!!)
+        })
     }
 }

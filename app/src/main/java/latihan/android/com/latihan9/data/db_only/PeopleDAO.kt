@@ -1,5 +1,6 @@
 package latihan.android.com.latihan9.data.db_only
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
@@ -11,7 +12,7 @@ import latihan.android.com.latihan9.data.data_model.People
 interface PeopleDAO {
     //query select
     @Query("select * from people order by id desc")
-    fun getAll() : List<People>
+    fun getAll() : LiveData<List<People>>
 
     //query insert
     @Insert(onConflict =  OnConflictStrategy.REPLACE)
