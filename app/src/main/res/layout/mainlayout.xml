@@ -2,13 +2,17 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        
+        android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".views.MainClass"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
 >
     <fragment
-            android:name="latihan.android.com.latihan9.views.views_list.ListPeopleFragment"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation_graph"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/peopleListFragment"/>
+            android:id="@+id/navigationHost"/>
 
 </android.support.constraint.ConstraintLayout>

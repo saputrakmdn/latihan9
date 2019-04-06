@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragmen_for_list_people.*
 import latihan.android.com.latihan9.R
 import latihan.android.com.latihan9.StartApp
@@ -30,10 +31,14 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
 
     }
     override fun onItemClick(people: People, itemView: View) {
-        Toast.makeText(context, "test Click contact list", Toast.LENGTH_SHORT).show()
-        val intent = Intent(context, DetailAct::class.java)
-        intent.putExtra(getString(R.string.people_id), people.id)
-        startActivity(intent)
+//        Toast.makeText(context, "test Click contact list", Toast.LENGTH_SHORT).show()
+//        val intent = Intent(context, DetailAct::class.java)
+//        intent.putExtra(getString(R.string.people_id), people.id)
+//        startActivity(intent)
+        val detailBundle = Bundle().apply {
+            putInt("PEOPLE_ID", people.id)
+        }
+        view?.findNavController()?.navigate(R.id.action_listPeopleFragment_to_detailFragment, detailBundle)
     }
     private fun populatePeopleList(peoplelist : List<People>){
         peopleRecyclerView.adapter = ListPeopleAdapter(peoplelist, this)
@@ -42,9 +47,10 @@ class ListPeopleFragment :Fragment(), ListPeopleAdapter.OnItemClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addFab.setOnClickListener{
-            Toast.makeText(context, "test Click fab", Toast.LENGTH_SHORT).show()
-            val intent = Intent(context, AddPeopleData::class.java)
-            startActivity(intent)
+//            Toast.makeText(context, "test Click fab", Toast.LENGTH_SHORT).show()
+//            val intent = Intent(context, AddPeopleData::class.java)
+//            startActivity(intent)
+            view.findNavController().navigate(R.id.action_listPeopleFragment_to_fragmentAddPeople)
         }
          viewModel.getPeopleList().observe(this, Observer<List<People>> {
              peoples -> peoples?.let {
